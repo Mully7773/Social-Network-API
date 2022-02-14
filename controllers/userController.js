@@ -23,11 +23,23 @@ module.exports = {
     },
 
     //create a new user
-    createUser (req, res) {
-        User.create(req.body)
-            .then((user) => res.json(user))
-            .catch((err) => res.status(500).json(err))
+    // createUser (req, res) {
+    //     User.create(req.body)
+    //         .then((user) => res.json(user))
+    //         .catch((err) => res.status(500).json(err))
+    // },
+
+   async createUser (req, res) {
+       try {
+      const user = await User.create(req.body)
+             res.json(user)
+             console.log(user)
+       } catch (err) {
+        console.log(err.message)
+        res.status(500).json(err)}
     },
+
+    
 
     deleteUser (req, res) {
         User.findOneAndDelete({ _id: req.params.userId })
@@ -39,6 +51,7 @@ module.exports = {
         .then(() => res.json({ message: 'User and associated thoughts deleted!'}))
         .catch((err) => res.status(500).json(err));
     },
+
     updateUser (req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
