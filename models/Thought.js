@@ -1,5 +1,6 @@
 const { Schema, Types, model } = require('mongoose');
 const dateFormat = require('../utils/helpers');
+const moment = require('moment');
 const { ObjectId } = require('bson');
 
 
@@ -21,7 +22,7 @@ const reactionSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        // get: createdAtDate => dateFormat(createdAtDate)
+        get: (momentDateFormat) => moment(momentDateFormat).format('MMM DD, YYYY [at] hh:mm a')
     }
 },
 {
@@ -42,7 +43,7 @@ const thoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        // get: createdAtDate => dateFormat(createdAtDate) //this might not work
+        get: (momentDateFormat) => moment(momentDateFormat).format('MMM DD, YYYY [at] hh:mm a')
     },
     username: {
         type: String,

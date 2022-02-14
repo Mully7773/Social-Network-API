@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Mully7773/Social-Network-API#readme",
   "dependencies": {
     "express": "^4.17.2",
+    "moment": "^2.29.1",
     "mongoose": "^6.2.1"
   }
 }
