@@ -23,6 +23,11 @@ async createThought (req, res) {
    const thought = await Thought.create(req.body)
           res.json(thought)
           console.log(thought)
+        return User.findOneAndUpdate(
+            { _id: req.body.userId },
+            { $addToSet: { thoughts: thought._id }},
+            {new: true}
+        );
     } catch (err) {
      console.log(err.message)
      res.status(500).json(err)}
