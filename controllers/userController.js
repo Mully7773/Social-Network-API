@@ -14,6 +14,8 @@ module.exports = {
     getSingleUser (req, res) {
         User.findOne({ _id: req.params.userId })
         .select('-__v')
+        .populate('thoughts')
+        .populate('friends')
         .then((user) => 
             !user
                 ? res.status(404).json({ message: 'Sorry, no user with that ID'})
@@ -22,12 +24,6 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
 
-    //create a new user
-    // createUser (req, res) {
-    //     User.create(req.body)
-    //         .then((user) => res.json(user))
-    //         .catch((err) => res.status(500).json(err))
-    // },
 
    async createUser (req, res) {
        try {
@@ -43,11 +39,11 @@ module.exports = {
 
     deleteUser (req, res) {
         User.findOneAndDelete({ _id: req.params.userId })
-        .then((user) =>
-            !user
-            ? res.status(404).json({ message: 'Sorry, no user with that ID'})
-            : Thought.deleteMany({ _id: { $in: user.thoughts } })
-        )
+        // .then((user) =>
+        //     !user
+        //     ? res.status(404).json({ message: 'Sorry, no user with that ID'})
+        //     : Thought.deleteMany({ _id: { $in: user.thoughts } })
+        // )
         .then(() => res.json({ message: 'User and associated thoughts deleted!'}))
         .catch((err) => res.status(500).json(err));
     },
