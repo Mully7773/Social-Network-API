@@ -7,6 +7,7 @@
 This is an API for a social network web application where users can create a profile, share their thoughts, make friends, and react to friends’ thoughts. This application utilizes Express.js, MongoDB, Mongoose, and Moment.js. 
 
 ## Table of Contents
+* [Screenshot](#screenshot)
 * [Video](#video)
 * [Installation](#installation)
 * [Usage](#usage)
@@ -14,6 +15,10 @@ This is an API for a social network web application where users can create a pro
 * [Tests](#tests)
 * [Questions](#questions)
 * [License](#license)
+
+## Screenshot:
+
+![Screenshot of Insomnia Get All Users](./assets/screenshots/S0.png)
 
 ## Video:
 https://watch.screencastify.com/v/Sqfw4K63tzBg1JR7QYtR
