@@ -56,5 +56,37 @@ updateThought(req, res) {
         });
 },
 
+async createReaction (req, res) {
+    try {
+        console.log('You are adding a reaction')
+        const reaction = await Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $addToSet: { reactions: req.body} },
+            { runValidators: true, new: true }
+        )
+        res.json(reaction)
+        console.log(reaction)
+    } catch (err) {
+        console.log(err.message)
+        res.status(500).json(err)
+    }
+},
 
+deleteReaction (req, res) {
+    Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $pull: { reactions: req.body } },
+        { runValidators: true, new: true }
+        )
+
+    .then((reaction) =>
+    !reaction
+    ? res
+        .status(404)
+        .json({ message: 'No reaction found with that ID '})
+    : res.json(reaction)
+    )
+    .catch((err) => res.status(500).json(err));
+    },
 };
+
